@@ -7,7 +7,7 @@ WORKDIR /server
 USER minecraft
 
 ARG PAPER_VERSION=1.21.11
-ARG PAPER_BUILD=113
+ARG PAPER_BUILD=69
 RUN curl -o paper.jar -H "User-Agent: msud-paper-gitops-lab (https://github.com/msud/msud-paper-gitops-lab)" \
     https://api.papermc.io/v2/projects/paper/versions/${PAPER_VERSION}/builds/${PAPER_BUILD}/downloads/paper-${PAPER_VERSION}-${PAPER_BUILD}.jar
 
