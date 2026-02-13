@@ -7,3 +7,14 @@
 #   - online-mode=false (for easier testing)
 #
 # Hint: Use the data field with a multi-line string
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gabby-paper-config
+  namespace: gabby-paper
+data:
+  server.properties: |
+    server-port=25565
+    motd=further eden
+    max-players=20
+    online-mode=false

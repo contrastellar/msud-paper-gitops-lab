@@ -6,3 +6,15 @@
 #
 # Note: TCPRoute is in gateway.networking.k8s.io/v1alpha2
 # This may vary depending on your Gateway controller version
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TCPRoute
+metadata:
+  name: gabby-paper-route
+  namespace: gabby-paper
+spec:
+  parentRefs:
+    - name: gabby-paper-gateway
+  rules:
+    - backendRefs:
+        - name: gabby-paper
+          port: 25565

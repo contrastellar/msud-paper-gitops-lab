@@ -10,3 +10,48 @@
 #   - Mount the PVC at /server/world
 #
 # Bonus: Add a readinessProbe using tcpSocket on port 25565
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gabby-paper
+  namespace: gabby-paper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gabby-paper
+  template:
+    metadata:
+      labels:
+        app: gabby-paper
+    spec:
+      containers:
+        - name: paper
+          image: ghcr.io/contrastellar/msud-paper-gitops-lab:latest
+          ports:
+            - containerPort: 25565
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+          volumeMounts:
+            - name: config
+              mountPath: /server/server.properties
+              subPath: server.properties
+            - name: world
+              mountPath: /server/world
+          readinessProbe:
+            tcpSocket:
+              port: 25565
+            initialDelaySeconds: 30
+            periodSeconds: 10
+      volumes:
+        - name: config
+          configMap:
+            name: gabby-paper-config
+        - name: world
+          persistentVolumeClaim:
+            claimName: gabby-paper-world

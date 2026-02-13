@@ -9,3 +9,14 @@
 #     - Note: use your assigned port in the 30000-32767 range
 #
 # Hint: Gateway API resources use the gateway.networking.k8s.io/v1 API version
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: gabby-paper-gateway
+  namespace: gabby-paper
+spec:
+  gatewayClassName: envoy-gateway
+  listeners:
+    - name: minecraft
+      protocol: TCP
+      port: 32212
