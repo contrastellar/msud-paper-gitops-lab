@@ -25,6 +25,8 @@ spec:
       labels:
         app: gabby-paper
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: paper
           image: ghcr.io/contrastellar/msud-paper-gitops-lab:latest
